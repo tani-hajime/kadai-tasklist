@@ -22,6 +22,7 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('tasks', 'TasksController');//裏で書いてくれている文法としては、アクションまでいれるのが正しい
+    
 });
 
 

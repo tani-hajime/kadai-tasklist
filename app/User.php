@@ -9,6 +9,20 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
+    
+    
+    
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+    
+    
+    public function loadRelationshipCounts()
+    {
+        $this->loadCount('tasks');
+    }
+    
 
     /**
      * The attributes that are mass assignable.
