@@ -17,6 +17,7 @@
                     <th>id</th>
                     <th>ステータス</th>
                     <th>タスク内容</th>
+                    <th>user_id</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,7 +26,8 @@
                     {{-- メッセージ詳細ページへのリンク --}}
                     <td>{!! link_to_route('tasks.show', $task->id, ['task' => $task->id]) !!}</td>
                     <td>{{ $task->status }}</td>
-                    <td>{{ $task->content }}</td><br>
+                    <td>{{ $task->content }}</td>
+                    <td>{{ $task->user_id }}</td><br>
                 </tr>
                 @endforeach
             </tbody>
