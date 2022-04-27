@@ -61,7 +61,7 @@ class TasksController extends Controller
         //$task->save();
         
         
-        $request->user()->tasks()->create([
+        $request->user()->tasks()->create([  //user_idのカラムに自動的にuser_idをいれるために、モデルファイルで定義したbelongToのメソッドを呼び出している
             'content' => $request->content,
             'status' => $request->status
         ]);
@@ -77,16 +77,30 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,Request $request)
     {
-        //
-        // idの値でメッセージを検索して取得
+        
         $task = Task::findOrFail($id);
+        
+        $login_id = \Auth::id();
+        
+        
+        
+   
+        if($login_id != $task->user_id){
+            return redirect('/');
+            echo "自分が投稿した内容ではないため、表示できません。";
+        };
+        
+        // idの値でメッセージを検索して取得
+        
 
         // メッセージ詳細ビューでそれを表示
+        
         return view('tasks.show', [
             'task' => $task,
         ]);
+        
     }
 
     /**
