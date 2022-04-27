@@ -18,11 +18,11 @@ class TasksController extends Controller
         //
          // メッセージ一覧を取得
         $task = Task::all();
-        $check = "";
+      
 
         // メッセージ一覧ビューでそれを表示
         return view('tasks.index', [
-            'task' => $task,'check' => $check
+            'task' => $task
         ]);
     }
 
@@ -88,10 +88,10 @@ class TasksController extends Controller
         
    
         if($login_id != $task->user_id){
-            $check = "自分の投稿じゃないので表示できません。";
+
             $task = Task::all();
             return view('tasks.index', [
-            'task' => $task,'check' => $check
+            'task' => $task
             ]);
             
             

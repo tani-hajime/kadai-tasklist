@@ -6,7 +6,10 @@
     @if (Auth::check())
         <h1>タスクリスト一覧</h1>
         
-        <p>{{$check}}</p>
+      
+        
+        
+        
         
         @if (count($task) > 0)
             <table class="table table-striped">
@@ -20,11 +23,14 @@
                 </thead>
                 <tbody>
                     @foreach ($task as $task)
+                    
                     <tr>
+                        @if (Auth::id() == $task->user_id)
                         {{-- メッセージ詳細ページへのリンク --}}
                         <td>{!! link_to_route('tasks.show', $task->id, ['task' => $task->id]) !!}</td>
                         <td>{{ $task->status }}</td>
                         <td>{{ $task->content }}</td><br>
+                        @endif
                         
                     </tr>
                     @endforeach
