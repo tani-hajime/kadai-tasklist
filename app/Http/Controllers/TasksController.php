@@ -55,10 +55,17 @@ class TasksController extends Controller
         ]);
         //
         // メッセージを作成
-        $task = new Task;
-        $task->content = $request->content;
-        $task->status = $request->status;
-        $task->save();
+        //$task = new Task;
+        //$task->content = $request->content;
+        //$task->status = $request->status;
+        //$task->save();
+        
+        
+        $request->user()->tasks()->create([
+            'content' => $request->content,
+            'status' => $request->status
+        ]);
+       
 
         // トップページへリダイレクトさせる
         return redirect('/');
