@@ -5,6 +5,9 @@
 
     @if (Auth::check())
         <h1>タスクリスト一覧</h1>
+        
+        <p>{{$check}}</p>
+        
         @if (count($task) > 0)
             <table class="table table-striped">
                 <thead>
@@ -12,7 +15,7 @@
                         <th>id</th>
                         <th>ステータス</th>
                         <th>タスク内容</th>
-                        <th>user_id</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -21,8 +24,8 @@
                         {{-- メッセージ詳細ページへのリンク --}}
                         <td>{!! link_to_route('tasks.show', $task->id, ['task' => $task->id]) !!}</td>
                         <td>{{ $task->status }}</td>
-                        <td>{{ $task->content }}</td>
-                        <td>{{ $task->user_id }}</td><br>
+                        <td>{{ $task->content }}</td><br>
+                        
                     </tr>
                     @endforeach
                 </tbody>
@@ -44,9 +47,11 @@
             <h1>Welcome to the Microposts</h1>
             {{-- ユーザ登録ページへのリンク --}}
             {!! link_to_route('signup.get', 'Sign up now!', [], ['class' => 'btn btn-lg btn-primary']) !!}
+            <br>
+            {!! link_to_route('login', 'Login', [], ['class' => 'nav-link']) !!}
         </div>
         
-    <li class="nav-item">{!! link_to_route('login', 'Login', [], ['class' => 'nav-link']) !!}</li>
+
         
     @endif
 

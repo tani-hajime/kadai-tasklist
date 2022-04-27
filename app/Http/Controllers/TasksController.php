@@ -18,10 +18,11 @@ class TasksController extends Controller
         //
          // メッセージ一覧を取得
         $task = Task::all();
+        $check = "";
 
         // メッセージ一覧ビューでそれを表示
         return view('tasks.index', [
-            'task' => $task,
+            'task' => $task,'check' => $check
         ]);
     }
 
@@ -81,15 +82,19 @@ class TasksController extends Controller
     {
         
         $task = Task::findOrFail($id);
-        
         $login_id = \Auth::id();
         
         
         
    
         if($login_id != $task->user_id){
-            return redirect('/');
-            echo "自分が投稿した内容ではないため、表示できません。";
+            $check = "自分の投稿じゃないので表示できません。";
+            $task = Task::all();
+            return view('tasks.index', [
+            'task' => $task,'check' => $check
+            ]);
+            
+            
         };
         
         // idの値でメッセージを検索して取得
