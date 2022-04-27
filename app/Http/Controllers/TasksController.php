@@ -84,16 +84,8 @@ class TasksController extends Controller
         $task = Task::findOrFail($id);
         $login_id = \Auth::id();
         
-        
-        
-   
         if($login_id != $task->user_id){
-
-            $task = Task::all();
-            return view('tasks.index', [
-            'task' => $task
-            ]);
-            
+            return redirect('/');
             
         };
         
@@ -119,6 +111,13 @@ class TasksController extends Controller
         //
         // idの値でメッセージを検索して取得
         $task = Task::findOrFail($id);
+ 
+        $login_id = \Auth::id();
+        
+        if($login_id != $task->user_id){
+            return redirect('/');
+            
+        };
 
         // メッセージ編集ビューでそれを表示
         return view('tasks.edit', [
@@ -142,6 +141,13 @@ class TasksController extends Controller
         //
         // idの値でメッセージを検索して取得
         $task = Task::findOrFail($id);
+        $login_id = \Auth::id();
+        
+        if($login_id != $task->user_id){
+            return redirect('/');
+            
+        };
+        
         // メッセージを更新
         $task->content = $request->content;
         $task->status = $request->status; 
@@ -162,6 +168,13 @@ class TasksController extends Controller
         //
         // idの値でメッセージを検索して取得
         $task = Task::findOrFail($id);
+  
+        $login_id = \Auth::id();
+        
+        if($login_id != $task->user_id){
+            return redirect('/');
+            
+        };
         // メッセージを削除
         $task->delete();
 
