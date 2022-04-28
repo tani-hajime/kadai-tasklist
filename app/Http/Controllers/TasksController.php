@@ -143,15 +143,15 @@ class TasksController extends Controller
         $task = Task::findOrFail($id);
         $login_id = \Auth::id();
         
-        if($login_id != $task->user_id){
-            return redirect('/');
-            
-        };
-        
-        // メッセージを更新
+        if($login_id === $task->user_id){
+            // メッセージを更新
         $task->content = $request->content;
         $task->status = $request->status; 
         $task->save();
+            
+        };
+        
+        
 
         // トップページへリダイレクトさせる
         return redirect('/');
@@ -171,12 +171,12 @@ class TasksController extends Controller
   
         $login_id = \Auth::id();
         
-        if($login_id != $task->user_id){
-            return redirect('/');
+        if($login_id === $task->user_id){
+            $task->delete();
             
         };
         // メッセージを削除
-        $task->delete();
+        
 
         // トップページへリダイレクトさせる
         return redirect('/');

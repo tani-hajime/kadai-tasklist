@@ -27,11 +27,20 @@
                 </div>
                 
                 <div class="collapse navbar-collapse" id="nav-bar">
-            <ul class="navbar-nav mr-auto"></ul>
-            <ul class="navbar-nav">
-                {{-- ログアウトへのリンク --}}
-                <li class="dropdown-item">{!! link_to_route('logout.get', 'Logout') !!}</li>
-            </ul>
+                    <ul class="navbar-nav mr-auto"></ul>
+                    <ul class="navbar-nav">
+                        @if (Auth::check())
+                            
+                     
+                        <li class="dropdown-item">{!! link_to_route('tasks.create', '新規タスクの投稿') !!}</li>
+                        <li class="dropdown-item">{!! link_to_route('logout.get', 'ログアウト') !!}</li>
+                        
+                        @else
+                        <li class="dropdown-item">{!! link_to_route('login', 'ログイン') !!}</li>
+                        <li class="dropdown-item">{!! link_to_route('signup.get', 'サインアップ') !!}</li>
+                            
+                        @endif
+                    </ul>
         </div>
                 
             </nav>
